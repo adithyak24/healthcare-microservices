@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.pm.billingservice.grpc";
+option java_outer_classname = "PatientProto";
+
+package billingservice;
+
+// Service to send patient data to BillingService
+// This service will be IMPLEMENTED by BillingService
+// and CALLED by PatientService.
+// For clarity, it's often good practice to define services
+// in the proto of the service that IMPLEMENTS it. 
+// However, sharing the message types (PatientData) is key.
+
+// Message representing the core patient data that might be sent to other services
+message PatientData {
+  string id = 1; // UUID as string
+  string name = 2;
+  string email = 3;
+  string address = 4;
+  string dateOfBirth = 5;    // YYYY-MM-DD
+  string registeredDate = 6; // YYYY-MM-DD
+  string problem = 7;
+  string location = 8;
+  string consultationFee = 9; // String representation of BigDecimal
+}
+
+// Request message for SendPatientDataToBilling RPC
+message BillingRequest {
+  PatientData patient_data = 1;
+}
+
+// Response message for SendPatientDataToBilling RPC
+message BillingResponse {
+  string confirmation_id = 1; 
+  string status_message = 2;  
+  bool success = 3;
+}
+
+// Service definition that BillingService will implement
+service BillingPatientDataReceiver {
+  rpc ReceivePatientData (BillingRequest) returns (BillingResponse);
+} 

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.pm.billingservice.grpc"; // Package for generated classes from billing's API
+option java_outer_classname = "BillingApiProto";    // Renamed to avoid conflict
+
+package billingservice; // Protobuf package name
+
+// Message representing the core patient data (matches definition in billing-service)
+message PatientData {
+  string id = 1; // UUID as string
+  string name = 2;
+  string email = 3;
+  string address = 4;
+  string dateOfBirth = 5;    // YYYY-MM-DD
+  string registeredDate = 6; // YYYY-MM-DD
+  string problem = 7;
+  string location = 8;
+  string consultationFee = 9; // String representation of BigDecimal
+}
+
+// Request message (matches definition in billing-service)
+message BillingRequest {
+  PatientData patient_data = 1;
+}
+
+// Response message (matches definition in billing-service)
+message BillingResponse {
+  string confirmation_id = 1; 
+  string status_message = 2;  
+  bool success = 3;
+}
+
+// Service definition that BillingService implements, and PatientService will call
+service BillingPatientDataReceiver {
+  rpc ReceivePatientData (BillingRequest) returns (BillingResponse);
+} 

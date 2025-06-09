@@ -1,0 +1,254 @@
+# ========================================
+# Healthcare Microservices .gitignore
+# ========================================
+
+# ====== Java & Maven ======
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Maven
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+**/mvnw
+**/mvnw.cmd
+
+# ====== Spring Boot ======
+application-*.properties
+application-*.yml
+!application.properties
+!application.yml
+!application-prod.yml
+
+# ====== Node.js & NPM ======
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.npm
+.yarn-integrity
+.pnpm-debug.log*
+
+# ====== React Build ======
+build/
+dist/
+*.tsbuildinfo
+
+# ====== Environment Variables ======
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# ====== IDE Files ======
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Eclipse
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ====== Operating System ======
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ====== Logs ======
+logs/
+*.log
+log/
+*.log.*
+*.out
+
+# ====== Database ======
+*.sqlite
+*.sqlite3
+*.db
+*.h2.db
+*.trace.db
+*.lock.db
+
+# ====== Docker ======
+.dockerignore
+docker-compose.override.yml
+.docker/
+
+# ====== Redis ======
+dump.rdb
+*.rdb
+appendonly.aof
+
+# ====== Kafka ======
+kafka-logs/
+__consumer_offsets-*
+*.index
+*.timeindex
+*.snapshot
+
+# ====== Elasticsearch ======
+elasticsearch/data/
+*.elasticsearch
+
+# ====== Certificates & Keys ======
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+*.keystore
+*.truststore
+
+# ====== Generated Code ======
+# gRPC generated files
+**/generated/
+**/target/generated-sources/
+**/src/main/java/**/grpc/
+**/build/generated/
+
+# Protobuf compiled files
+*.pb.go
+*_pb2.py
+*_pb2_grpc.py
+
+# ====== Test Coverage ======
+coverage/
+*.lcov
+.nyc_output/
+jacoco.exec
+*.exec
+
+# ====== Temporary Files ======
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+
+# ====== Backup Files ======
+*.bak
+*.backup
+*.old
+*.orig
+
+# ====== Configuration Overrides ======
+config/local.yml
+config/development.yml
+config/production.yml
+application-local.properties
+application-dev.properties
+
+# ====== AWS & Cloud ======
+.aws/
+*.pem
+cdk.out/
+.cdk.staging/
+cdk.context.json
+
+# ====== Package Managers ======
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ====== Build Tools ======
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+
+# ====== Runtime ======
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ====== Sensitive Data ======
+secrets/
+*.secret
+api-keys.txt
+stripe-keys.txt
+auth0-config.json
+
+# ====== Custom Project Files ======
+TODO.md
+NOTES.md
+.scratch/
+experiments/
+
+# ====== Keep Essential Files ======
+!.gitkeep
+!README.md
+!LICENSE
+!CHANGELOG.md

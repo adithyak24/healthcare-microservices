@@ -1,0 +1,290 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f7f6;
+  color: #333;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: left;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+
+.App-main {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.container {
+  padding: 20px;
+}
+
+.form-section,
+.list-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  flex: 1;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .App-main {
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-section,
+  .list-section {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+}
+
+.patient-form-container h2,
+.patient-list-container h2 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.patient-form-container div {
+  margin-bottom: 15px;
+}
+
+.patient-form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+.patient-form-container input[type="text"],
+.patient-form-container input[type="email"],
+.patient-form-container input[type="number"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.patient-form-container button[type="submit"],
+.patient-form-container button[type="button"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.patient-form-container button[type="submit"]:hover,
+.patient-form-container button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+.patient-form-container button[type="button"] {
+  background-color: #6c757d;
+}
+
+.patient-form-container button[type="button"]:hover {
+  background-color: #545b62;
+}
+
+.patient-list-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.patient-list-container li {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.patient-list-container li:hover {
+  background-color: #e9e9e9;
+}
+
+.patient-list-container li strong {
+  color: #007bff;
+  font-size: 1.1em;
+}
+
+.App-footer {
+  padding: 10px;
+  text-align: center;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #6c757d;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: #333;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand .navbar-item {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.navbar-menu {
+  display: flex;
+}
+
+.navbar-start .navbar-item {
+  color: #ddd;
+  margin-left: 15px;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.navbar-start .navbar-item:hover,
+.navbar-start .navbar-item.active-link {
+  background-color: #555;
+  color: #fff;
+}
+
+/* Home Page Layout */
+.home-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.form-section {
+  flex: 2;
+  min-width: 300px;
+}
+
+.recent-patients-section {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 250px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.recent-patients-section h2 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.recent-patients-list {
+  list-style: none;
+  padding: 0;
+}
+
+.recent-patient-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.recent-patient-item strong {
+  color: #007bff;
+}
+
+.view-all-link {
+  display: block;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+/* Error and Success Messages */
+.patient-form-container p[style*="color: red"],
+.patient-form-container p[style*="color: green"] {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.patient-form-container p[style*="color: red"] {
+  background-color: #f8d7da;
+  color: #721c24 !important;
+  border: 1px solid #f5c6cb;
+}
+
+.patient-form-container p[style*="color: green"] {
+  background-color: #d4edda;
+  color: #155724 !important;
+  border: 1px solid #c3e6cb;
+}

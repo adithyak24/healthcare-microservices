@@ -1,0 +1,112 @@
+server:
+  port: 4004 # Gateway listens on port 4004
+
+spring:
+  application:
+    name: api-gateway
+  # Redis configuration commented out for in-memory rate limiting
+  # redis:
+  #   host: localhost
+  #   port: 6379
+  #   timeout: 2000ms
+  #   connect-timeout: 2000ms
+  #   lettuce:
+  #     pool:
+  #       max-active: 8
+  #       max-idle: 8
+  #       min-idle: 0
+  #     shutdown-timeout: 100ms
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-8n8hmdpdvrtyezom.us.auth0.com/
+          # jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}.well-known/jwks.json # Usually discovered
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # Apply to all paths
+            allowedOrigins: 
+              - "http://localhost:3000" # Patient Portal
+              - "http://localhost:3001" # Receptionist Portal
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*" 
+            allowCredentials: true
+      routes:
+        - id: test-route # Added for diagnostics
+          uri: https://httpstat.us 
+          predicates:
+            - Path=/gatewaytest/echo
+          filters:
+            - RewritePath=/gatewaytest/echo, /200
+
+        - id: auth-service-route
+          uri: http://localhost:4005
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+            - name: InMemoryRateLimiting
+              args:
+                max-requests: 5 # Very low limit for easy testing (5 requests per minute)
+                window-size: 60
+
+        # Route for /api/patients/** to patient-service
+        - id: patient-service-route
+          uri: http://patient-service:4000
+          predicates:
+            - Path=/api/patients/**
+          filters:
+            - StripPrefix=1 # Strips /api, so patient-service gets /patients/**
+            - name: InMemoryRateLimiting
+              args:
+                max-requests: 10 # Low limit for easy testing (10 requests per minute)
+                window-size: 60
+
+        # CORRECTED ROUTE FOR BILLING SERVICE
+        - id: billing-service-route
+          uri: http://billing-service:9000
+          predicates:
+            - Path=/api/billing/**
+          filters:
+            - StripPrefix=1 # Strips /api, so billing-service gets /billing/**
+            - name: InMemoryRateLimiting
+              args:
+                max-requests: 100 # Higher limit for billing operations
+                window-size: 60
+
+        # Route for /api/docs/patients to patient-service /v3/api-docs
+        - id: api-docs-patient-route
+          uri: http://localhost:4000
+          predicates:
+            - Path=/api-docs/patients
+          filters:
+            - RewritePath=/api-docs/patients,/v3/api-docs
+
+        # Route for /api/docs/auth to patient-service /v3/api-docs
+        - id: api-docs-auth-route
+          uri: http://localhost:4005 #This should be auth-service
+          predicates:
+            - Path=/api-docs/auth
+          filters:
+            - RewritePath=/api-docs/auth,/v3/api-docs
+
+# Custom properties for different services
+appcustomprops:
+  patient-service:
+    jwt:
+      secret: tWHIaUjqqsxZaJp+03Sh+1VdpEs2XYQVQ5Lw6pi3afs=
+      issuer: patient-service-local # This should match the issuer set in patient-service's JwtTokenProvider
+
+# Logging Configuration
+logging:
+  level:
+    org.springframework.security: INFO
+    org.springframework.cloud.gateway: INFO
+    reactor.netty.http.server: INFO
